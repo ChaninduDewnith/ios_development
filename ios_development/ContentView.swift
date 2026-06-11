@@ -13,7 +13,8 @@ struct ContentView: View {
     @State private var gameOver = false
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    
+    let colorTimer = Timer.publish(every: 2, on: .main, in: .common).autoconnect()
+
     var body: some View {
         
         if gameOver {
@@ -65,6 +66,9 @@ struct ContentView: View {
                     gameOver = true
                 }
             }
+            .onReceive(colorTimer) { _ in
+                changeColor()
+            }
             
             .padding()
         }
@@ -77,6 +81,11 @@ struct ContentView: View {
             let progress = Double(timeLeft) / 10.0
 
             return minScale + (maxScale - minScale) * progress
+    }
+    
+    func changeColor() {
+            let colors: [Color] = [.blue, .green, .gray]
+            buttonColor = colors.randomElement()!
     }
     func resetGame() {
             score = 0
