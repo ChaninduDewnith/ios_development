@@ -25,10 +25,10 @@ struct GameOverView: View {
                 .font(.title)
 
             Button("Play Again") {
-                           playAgain()
+                playAgain()
             }
             .padding()
-            .background(Color.green)
+            .background(Color.blue)
             .foregroundColor(.white)
             .cornerRadius(10)
         }

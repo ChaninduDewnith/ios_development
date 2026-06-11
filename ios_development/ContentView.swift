@@ -24,7 +24,7 @@ struct ContentView: View {
             )
         } else {
             
-            VStack(spacing: 30) {
+            VStack(spacing: 40) {
                 
                 Text("Score: \(score)")
                     .font(.largeTitle)
@@ -83,10 +83,13 @@ struct ContentView: View {
             return minScale + (maxScale - minScale) * progress
     }
     
+    
     func changeColor() {
             let colors: [Color] = [.blue, .green, .gray]
             buttonColor = colors.randomElement()!
     }
+    
+    
     func resetGame() {
             score = 0
             timeLeft = 10
