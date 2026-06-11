@@ -50,7 +50,7 @@ struct ContentView: View {
                         .background(buttonColor)
                         .foregroundColor(.white)
                         .clipShape(Circle())
-                    
+                        .scaleEffect(buttonScale())
                         .animation(.easeInOut(duration: 0.3), value: timeLeft)
                 }
             }
@@ -70,14 +70,21 @@ struct ContentView: View {
         }
     }
     
-    
+    func buttonScale() -> CGFloat {
+            let maxScale: CGFloat = 1.2
+            let minScale: CGFloat = 0.3
+
+            let progress = Double(timeLeft) / 10.0
+
+            return minScale + (maxScale - minScale) * progress
+    }
     func resetGame() {
             score = 0
             timeLeft = 10
             isPlaying = false
             gameOver = false
             buttonColor = .blue
-        }
+    }
     
     
 }
