@@ -10,6 +10,7 @@ import SwiftUI
 struct GameOverView: View {
 
     let score: Int
+    let playAgain: () -> Void
 
 
     var body: some View {
@@ -24,7 +25,7 @@ struct GameOverView: View {
                 .font(.title)
 
             Button("Play Again") {
-            
+                           playAgain()
             }
             .padding()
             .background(Color.green)
@@ -35,5 +36,5 @@ struct GameOverView: View {
 }
 
 #Preview {
-    GameOverView(score: 10,)
+    GameOverView(score: 10,playAgain: {})
 }

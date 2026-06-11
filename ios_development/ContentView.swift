@@ -19,7 +19,7 @@ struct ContentView: View {
         if gameOver {
             GameOverView(
                 score: score,
-                
+                playAgain: resetGame
             )
         } else {
             
@@ -69,6 +69,15 @@ struct ContentView: View {
             .padding()
         }
     }
+    
+    
+    func resetGame() {
+            score = 0
+            timeLeft = 10
+            isPlaying = false
+            gameOver = false
+            buttonColor = .blue
+        }
     
     
 }
