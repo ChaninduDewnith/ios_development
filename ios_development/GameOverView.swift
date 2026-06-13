@@ -36,5 +36,5 @@ struct GameOverView: View {
 }
 
 #Preview {
-    GameOverView(score: 10,playAgain: {})
+    GameOverView(score: 0,playAgain: {})
 }

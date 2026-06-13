@@ -39,13 +39,10 @@ struct ContentView: View {
                         isPlaying = true
                     }
                     
-                    
-                    else {
-                        score += 1
+                    score += 1
                     }
-                    
-                }) {
-                    Text("TAP ME!")
+                ) {
+                    Text("TAP ME")
                         .font(.largeTitle)
                         .frame(width: 200, height: 200)
                         .background(buttonColor)
