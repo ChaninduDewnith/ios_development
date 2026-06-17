@@ -19,7 +19,8 @@ struct LightItUpGameView: View {
     @State private var cards: [Card] = []
     @State private var buttonColor: Color = .blue
 
-  
+    @AppStorage("best_score")
+    private var bestScore = 0
 
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -48,7 +49,7 @@ struct LightItUpGameView: View {
     var body: some View {
 
           if gameOver {
-              LightItUpGameOverView()
+              LightItUpGameOverView(score: score, bestScore: bestScore, playAgain: resetGame)
           } else {
 
               ZStack {
@@ -185,6 +186,8 @@ struct LightItUpGameView: View {
               .navigationBarHidden(true)
               
               .onReceive(colorTimer) { _ in changeColor() }
+              .onReceive(timer) { _ in tick() }
+              .onReceive(colorTimer) { _ in changeColor() }
               .onAppear { setupCards() }
           }
       }
@@ -237,7 +240,33 @@ struct LightItUpGameView: View {
     func changeColor() {
             let colors: [Color] = [.blue, .green, .orange, .purple]
             buttonColor = colors.randomElement()!
-        }
+    }
+    
+    func tick() {
+            guard timeLeft > 0 else { endGame(); return }
+            if !isPlaying { return }
+            timeLeft -= 1
+            updateCards()
+            lightRandomCards()
+    }
+    
+    
+    func endGame() {
+            if score > bestScore { bestScore = score }
+            gameOver = true
+    }
+
+    
+    
+    func resetGame() {
+            score = 0
+            timeLeft = 60
+            isPlaying = false
+            gameOver = false
+            buttonColor = .blue
+            setupCards()
+    }
+
 
        
     
