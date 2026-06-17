@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct level{
+struct Level{
     let cardCount: Int
     let columns: Int
     let litWindow : Double
