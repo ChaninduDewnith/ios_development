@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct LightItUpGameOverView: View {
-    
-    
+    let score: Int
+    let bestScore: Int
+    let playAgain: () -> Void
 
-   
+    var isNewBest: Bool { score >= bestScore && score > 0 }
 
     var body: some View {
         NavigationStack {
@@ -24,10 +25,7 @@ struct LightItUpGameOverView: View {
 
                     
                     ZStack {
-                        Circle()
-                            .fill(Color(red: 0.40, green: 0.62, blue: 0.95).opacity(0.10))
-                            .frame(width: 90, height: 90)
-                       
+                        
                     }
                     .padding(.bottom, 24)
 
@@ -36,7 +34,12 @@ struct LightItUpGameOverView: View {
                         .font(.system(size: 32, weight: .bold, design: .rounded))
                         .foregroundColor(Color(red: 0.15, green: 0.20, blue: 0.35))
 
-                   
+                    if isNewBest {
+                        Text("New best score!")
+                            .font(.system(size: 14, weight: .medium, design: .rounded))
+                            .foregroundColor(Color(red: 0.40, green: 0.62, blue: 0.95))
+                            .padding(.top, 6)
+                    }
 
                     
                     HStack(spacing: 12) {
@@ -44,7 +47,7 @@ struct LightItUpGameOverView: View {
                             Text("Your score")
                                 .font(.system(size: 12, weight: .regular, design: .rounded))
                                 .foregroundColor(Color(red: 0.55, green: 0.60, blue: 0.70))
-                            Text("Score")
+                            Text("\(score)")
                                 .font(.system(size: 34, weight: .bold, design: .rounded))
                                 .foregroundColor(Color(red: 0.15, green: 0.20, blue: 0.35))
                         }
@@ -61,7 +64,7 @@ struct LightItUpGameOverView: View {
                             Text("Best")
                                 .font(.system(size: 12, weight: .regular, design: .rounded))
                                 .foregroundColor(Color(red: 0.55, green: 0.60, blue: 0.70))
-                            Text("bestScore")
+                            Text("\(bestScore)")
                                 .font(.system(size: 34, weight: .bold, design: .rounded))
                                 .foregroundColor(Color(red: 0.40, green: 0.62, blue: 0.95))
                         }
@@ -80,6 +83,22 @@ struct LightItUpGameOverView: View {
                     Spacer()
 
                     
+                    VStack(spacing: 12) {
+                        Button(action: playAgain) {
+                            HStack(spacing: 8) {
+                                
+                                    
+                                Text("Play Again")
+                                    .font(.system(size: 17, weight: .semibold, design: .rounded))
+                            }
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 56)
+                            .background(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(Color(red: 0.40, green: 0.62, blue: 0.95))
+                            )
+                        }
 
                         NavigationLink {
                             
@@ -107,9 +126,7 @@ struct LightItUpGameOverView: View {
             .navigationBarHidden(true)
         }
     }
-
-
-
-#Preview {
-    LightItUpGameOverView()
 }
+
+
+
