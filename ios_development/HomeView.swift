@@ -54,7 +54,7 @@ struct HomeView: View {
                         }
 
                         NavigationLink {
-                        
+                           LightItUpGameView()
                         } label: {
                             HStack(spacing: 10) {
                                 
