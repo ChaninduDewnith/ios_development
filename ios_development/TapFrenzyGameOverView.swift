@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct GameOverView: View {
+struct TapFrenzyGameOverView: View {
 
     let score: Int
     let playAgain: () -> Void
@@ -36,5 +36,5 @@ struct GameOverView: View {
 }
 
 #Preview {
-    GameOverView(score: 0,playAgain: {})
+    TapFrenzyGameOverView(score: 0,playAgain: {})
 }
