@@ -101,7 +101,7 @@ struct LightItUpGameOverView: View {
                         }
 
                         NavigationLink {
-                            
+                            LightItUpBestScoresView()
                         } label: {
                             HStack(spacing: 8) {
                                 

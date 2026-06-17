@@ -19,8 +19,11 @@ struct LightItUpGameView: View {
     @State private var cards: [Card] = []
     @State private var buttonColor: Color = .blue
 
-    @AppStorage("best_score")
+    @AppStorage("lighttap_best_score")
     private var bestScore = 0
+    
+    @AppStorage("lighttap_top_scores")
+    private var savedScores = ""
 
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -188,7 +191,10 @@ struct LightItUpGameView: View {
               .onReceive(colorTimer) { _ in changeColor() }
               .onReceive(timer) { _ in tick() }
               .onReceive(colorTimer) { _ in changeColor() }
-              .onAppear { setupCards() }
+              .onAppear{
+                  setupCards()
+                  lightRandomCards()
+                  isPlaying=true}
           }
       }
 
@@ -211,6 +217,10 @@ struct LightItUpGameView: View {
       
 
       func lightRandomCards() {
+          for i in cards.indices{
+              cards[i].isLit = false
+              
+          }
           let indices = cards.indices.shuffled()
           for i in indices.prefix(currentLevel.litCards) {
               cards[i].isLit = true
@@ -250,9 +260,20 @@ struct LightItUpGameView: View {
             lightRandomCards()
     }
     
+    func saveScore(){
+        var scores = savedScores
+            .split(separator: ",")
+            .compactMap{ Int($0)}
+        scores.append(score)
+        scores.sort(by: >)
+        scores=Array(scores.prefix(5))
+        savedScores = scores.map(String.init).joined(separator: ",")
+        
+    }
     
     func endGame() {
             if score > bestScore { bestScore = score }
+            saveScore()
             gameOver = true
     }
 
