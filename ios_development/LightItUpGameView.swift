@@ -183,24 +183,41 @@ struct LightItUpGameView: View {
                       Spacer()
 
                       
-                      if !isPlaying {
-                          Text("Tap the glowing tiles to score")
-                              .font(.system(size: 14, weight: .regular, design: .rounded))
-                              .foregroundColor(Color(red: 0.55, green: 0.60, blue: 0.70))
-                              .padding(.bottom, 32)
-                              .transition(.opacity)
-                      }
+                     if !isPlaying {
+                        Button(action: {
+                            withAnimation(.easeIn(duration: 0.2)) {
+                                isPlaying = true
+                            }
+                        }) {
+                            HStack(spacing: 8) {
+                                Image(systemName: "play.fill")
+                                    .font(.system(size: 15, weight: .semibold))
+                                Text("Start Game")
+                                    .font(.system(size: 17, weight: .semibold, design: .rounded))
+                            }
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 56)
+                            .background(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(Color(red: 0.40, green: 0.62, blue: 0.95))
+                            )
+                            .padding(.horizontal, 28)
+                        }
+                        .padding(.bottom, 40)
+                        .transition(.opacity)
+                    }
                   }
               }
               .navigationBarHidden(true)
               
               .onReceive(colorTimer) { _ in changeColor() }
               .onReceive(timer) { _ in tick() }
-              .onReceive(colorTimer) { _ in changeColor() }
+              
               .onAppear{
                   setupCards()
                   lightRandomCards()
-                  isPlaying=true}
+                  }
           }
       }
 
