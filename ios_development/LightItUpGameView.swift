@@ -19,11 +19,17 @@ struct LightItUpGameView: View {
     @State private var cards: [Card] = []
     @State private var buttonColor: Color = .blue
 
-    @AppStorage("lighttap_best_score")
-    private var bestScore = 0
+   
     
     @AppStorage("lighttap_top_scores")
     private var savedScores = ""
+
+    var bestScore: Int{
+        savedScores
+            .split(separator:",")
+            .compactMap{Int($0)}
+            .max() ?? 0
+    }
 
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -272,7 +278,7 @@ struct LightItUpGameView: View {
     }
     
     func endGame() {
-            if score > bestScore { bestScore = score }
+            
             saveScore()
             gameOver = true
     }
