@@ -12,7 +12,7 @@ struct LightItUpGameOverView: View {
     let bestScore: Int
     let playAgain: () -> Void
 
-    var isNewBest: Bool { score >= bestScore && score > 0 }
+    var isNewBest: Bool { score == bestScore && score > 0 }
 
     var body: some View {
         NavigationStack {
