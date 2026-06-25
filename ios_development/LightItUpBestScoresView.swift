@@ -18,8 +18,6 @@ struct LightItUpBestScoresView: View {
     }
 
     
-    
-
     var body: some View {
         ZStack {
             Color(red: 0.95, green: 0.97, blue: 1.0)
@@ -27,7 +25,6 @@ struct LightItUpBestScoresView: View {
 
             VStack(spacing: 0) {
 
-                
                 VStack(spacing: 6) {
                     ZStack {
                        
@@ -38,9 +35,7 @@ struct LightItUpBestScoresView: View {
                         .font(.system(size: 28, weight: .bold, design: .rounded))
                         .foregroundColor(Color(red: 0.15, green: 0.20, blue: 0.35))
 
-                    Text("Your personal best runs")
-                        .font(.system(size: 14, design: .rounded))
-                        .foregroundColor(Color(red: 0.55, green: 0.60, blue: 0.70))
+                  
                 }
                 .padding(.top, 32)
                 .padding(.bottom, 28)
@@ -71,7 +66,7 @@ struct LightItUpBestScoresView: View {
                                 }
 
                                 
-                                Text("#\(index + 1)")
+                                Text("\(index + 1)")
                                     .font(.system(size: 15, weight: .medium, design: .rounded))
                                     .foregroundColor(Color(red: 0.55, green: 0.60, blue: 0.70))
                                     .frame(width: 30, alignment: .leading)
@@ -87,9 +82,7 @@ struct LightItUpBestScoresView: View {
                                         : Color(red: 0.15, green: 0.20, blue: 0.35)
                                     )
 
-                                Text("pts")
-                                    .font(.system(size: 13, design: .rounded))
-                                    .foregroundColor(Color(red: 0.65, green: 0.70, blue: 0.78))
+                                
                             }
                             .padding(.horizontal, 18)
                             .padding(.vertical, 14)
