@@ -18,8 +18,6 @@ struct LightItUpBestScoresView: View {
     }
 
     
-    
-
     var body: some View {
         ZStack {
             Color(red: 0.95, green: 0.97, blue: 1.0)

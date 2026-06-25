@@ -227,8 +227,6 @@ struct LightItUpGameView: View {
                   }
               }
               .navigationBarHidden(true)
-              
-              .onReceive(colorTimer) { _ in changeColor() }
               .onReceive(timer) { _ in tick() }
               
               .onAppear{
@@ -296,7 +294,13 @@ struct LightItUpGameView: View {
           guard let index = cards.firstIndex(where: { $0.id == card.id }) else { return }
           withAnimation(.spring()) {
               if cards[index].isLit {
-                  score += 1
+                  let elapsed = 60 - timeLeft
+                  if elapsed >= 45{
+                      score += 5
+                  }
+                  else{
+                      score += 1
+                  }
                   cards[index].isLit = false
               } else {
                   score -= 1
@@ -339,10 +343,7 @@ struct LightItUpGameView: View {
     }
     
     
-    func changeColor() {
-            let colors: [Color] = [.blue, .green, .orange, .purple]
-            buttonColor = colors.randomElement()!
-    }
+   
     
     func tick() {
             guard timeLeft > 0 else { endGame(); return }
