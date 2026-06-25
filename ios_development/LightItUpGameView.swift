@@ -18,6 +18,10 @@ struct LightItUpGameView: View {
 
     @State private var cards: [Card] = []
     @State private var buttonColor: Color = .blue
+    
+    @State private var showLevelUp = false
+    @State private var displayedLevel = 1
+
 
    
     
@@ -52,7 +56,22 @@ struct LightItUpGameView: View {
             return Level(cardCount:9,columns: 3,litWindow: 0.8,litCards: 2)
         }
     }
+    
+    
+    var levelColor: Color {
+        let elapsed = 60 - timeLeft
 
+        switch elapsed {
+        case 0..<15:
+            return .blue
+        case 15..<30:
+            return .green
+        case 30..<45:
+            return .orange
+        default:
+            return .purple
+        }
+    }
    
 
     var body: some View {
@@ -146,14 +165,14 @@ struct LightItUpGameView: View {
                           ForEach(cards) { card in
                               RoundedRectangle(cornerRadius: 18)
                                   .fill(card.isLit
-                                      ? buttonColor.opacity(0.85)
+                                      ? levelColor.opacity(0.85)
                                       : Color.white)
                                   .frame(height: 95)
                                   .overlay(
                                       RoundedRectangle(cornerRadius: 18)
                                           .stroke(
                                               card.isLit
-                                                  ? buttonColor
+                                                  ? levelColor
                                                   : Color(red: 0.88, green: 0.91, blue: 0.97),
                                               lineWidth: card.isLit ? 0 : 1
                                           )
@@ -167,7 +186,7 @@ struct LightItUpGameView: View {
                                   .scaleEffect(card.isLit ? 1.06 : 1.0)
                                   .shadow(
                                       color: card.isLit
-                                          ? buttonColor.opacity(0.30)
+                                          ? levelColor.opacity(0.30)
                                           : Color.black.opacity(0.04),
                                       radius: card.isLit ? 10 : 4,
                                       x: 0, y: card.isLit ? 4 : 2
