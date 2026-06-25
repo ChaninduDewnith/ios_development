@@ -209,8 +209,6 @@ struct LightItUpGameView: View {
                             }
                         }) {
                             HStack(spacing: 8) {
-                                Image(systemName: "play.fill")
-                                    .font(.system(size: 15, weight: .semibold))
                                 Text("Start Game")
                                     .font(.system(size: 17, weight: .semibold, design: .rounded))
                             }
@@ -237,6 +235,25 @@ struct LightItUpGameView: View {
                   setupCards()
                   lightRandomCards()
                   }
+              
+              
+              if showLevelUp {
+                VStack(spacing: 12) {
+                      Text("LEVEL UP!")
+                          .font(.system(size: 38, weight: .bold))
+                      Text("Level \(displayedLevel)")
+                          .font(.title2)
+                          
+                  }
+                  .padding(40)
+                  .background(
+                      RoundedRectangle(cornerRadius: 24)
+                          .fill(levelColor)
+                  )
+                  .shadow(color: levelColor.opacity(0.7), radius: 20)
+                  .scaleEffect(showLevelUp ? 1 : 0.6)
+                  
+              }
           }
       }
 
@@ -289,6 +306,39 @@ struct LightItUpGameView: View {
       }
     
     
+    func checkLevelUp() {
+        let newLevel: Int
+
+        let elapsed = 60 - timeLeft
+
+        switch elapsed {
+        case 0..<15:
+            newLevel = 1
+        case 15..<30:
+            newLevel = 2
+        case 30..<45:
+            newLevel = 3
+        default:
+            newLevel = 4
+        }
+
+        if newLevel > displayedLevel {
+
+            displayedLevel = newLevel
+
+            withAnimation(.spring()) {
+                showLevelUp = true
+            }
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                withAnimation {
+                    showLevelUp = false
+                }
+            }
+        }
+    }
+    
+    
     func changeColor() {
             let colors: [Color] = [.blue, .green, .orange, .purple]
             buttonColor = colors.randomElement()!
@@ -298,6 +348,7 @@ struct LightItUpGameView: View {
             guard timeLeft > 0 else { endGame(); return }
             if !isPlaying { return }
             timeLeft -= 1
+            checkLevelUp()
             updateCards()
             lightRandomCards()
     }
@@ -314,7 +365,6 @@ struct LightItUpGameView: View {
     }
     
     func endGame() {
-            
             saveScore()
             gameOver = true
     }
