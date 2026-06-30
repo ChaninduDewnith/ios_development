@@ -3,7 +3,7 @@ import Combine
 
 
 
-struct ContentView: View {
+struct TapFrenzyGameView: View {
     
     @State private var score = 0
     @State private var timeLeft = 10
@@ -18,7 +18,7 @@ struct ContentView: View {
     var body: some View {
         
         if gameOver {
-            GameOverView(
+            TapFrenzyGameOverView(
                 score: score,
                 playAgain: resetGame
             )
@@ -101,5 +101,5 @@ struct ContentView: View {
 
 
 #Preview {
-    ContentView()
+    TapFrenzyGameView()
 }
