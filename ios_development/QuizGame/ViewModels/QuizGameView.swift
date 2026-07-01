@@ -49,14 +49,13 @@ struct QuizGameView: View {
 
                 case .loaded:
                     if gameOver {
-                        ResultView(score: vm.score){
-                            restartGame()
-                        }
+                        ResultView(score: vm.score,showResult:$gameOver,onRestart : restartGame)
+                            
                        
                     } else if vm.isFinished {
-                        ResultView(score: vm.score){
-                            restartGame()
-                        }
+                        ResultView(score: vm.score,showResult:$gameOver,onRestart : restartGame)
+                        
+                        
                         
                     } else {
                         quizContent
@@ -217,6 +216,10 @@ struct QuizGameView: View {
     func restartGame(){
         timeRemaining = 30
         gameOver = false
+        vm.resetGame()
+        Task{
+            await vm.load()
+        }
         
     }
     
