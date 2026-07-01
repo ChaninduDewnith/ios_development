@@ -83,8 +83,18 @@ struct LightItUpGameView: View {
               ZStack {
                   Color(red: 0.95, green: 0.97, blue: 1.0)
                       .ignoresSafeArea()
-
+                  
                   VStack(spacing: 0) {
+                      
+                      HStack(spacing: 12) {
+                          NavigationLink{
+                              HomeView()
+                          }label:{
+                              Image(systemName: "chevron.left")
+                          }
+                          Spacer()
+                      }
+                      .padding()
 
                       
                       HStack(spacing: 12) {
