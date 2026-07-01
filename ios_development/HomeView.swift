@@ -8,78 +8,69 @@
 import SwiftUI
 
 struct HomeView: View {
+    private var games: [GameItem] {
+        [
+            GameItem(
+                title: "Tap Frenzy",
+                icon: "rectangle.stack.fill",
+                tint: Color(red: 0.23, green: 0.20, blue: 0.54),
+                bgTint: Color(red: 0.81, green: 0.80, blue: 0.96),
+                cardTint: Color(red: 0.91, green: 0.90, blue: 0.98),
+                destination: AnyView(TapFrenzyGameView())
+            ),
+            GameItem(
+                title: "Light It Up",
+                icon: "rectangle.stack.fill",
+                tint: Color(red: 0.03, green: 0.31, blue: 0.25),
+                bgTint: Color(red: 0.62, green: 0.88, blue: 0.79),
+                cardTint: Color(red: 0.87, green: 0.96, blue: 0.92),
+                destination: AnyView(LightItUpGameView())
+            ),
+            GameItem(
+                title: "Quiz Game",
+                icon: "questionmark.circle.fill",
+                tint: Color(red: 0.44, green: 0.17, blue: 0.07),
+                bgTint: Color(red: 0.94, green: 0.60, blue: 0.48),
+                cardTint: Color(red: 0.98, green: 0.90, blue: 0.86),
+                destination: AnyView(QuizGameView())
+            )
+        ]
+    }
+
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(red: 0.95, green: 0.97, blue: 1.0)
+                Color(red: 0.23, green: 0.24, blue: 0.27)
                     .ignoresSafeArea()
 
-                VStack(spacing: 0) {
-                    Spacer()
-
-                    VStack(spacing: 8) {
-                        
-                             Text("Challenge")
-                            .font(.system(size: 38, weight: .bold, design: .rounded))
-                            .foregroundColor(Color(red: 0.15, green: 0.20, blue: 0.35))
-
-                        Text("Zone")
-                            .font(.system(size: 38, weight: .bold, design: .rounded))
-                            .foregroundColor(Color(red: 0.45, green: 0.65, blue: 0.95))
-
-                        Text("A collection of Mini Games.")
-                            .font(.system(size: 15, weight: .regular, design: .rounded))
-                            .foregroundColor(Color(red: 0.55, green: 0.60, blue: 0.70))
-                            .padding(.top, 4)
-                    }
-
-                    Spacer()
-
-                    VStack(spacing: 14) {
-                        NavigationLink {
-                            TapFrenzyGameView()
-                        } label: {
-                            HStack(spacing: 10) {
-                               
-                                Text("Tap Frenzy Game")
-                                    .font(.system(size: 17, weight: .semibold, design: .rounded))
-                            }
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 56)
-                            .background(
-                                RoundedRectangle(cornerRadius: 16)
-                                    .fill(Color(red: 0.40, green: 0.62, blue: 0.95))
-                            )
+                ScrollView {
+                    VStack(spacing: 28) {
+                        VStack(spacing: 6) {
+                            Text("Challenge zone")
+                                .font(.title2.weight(.medium))
+                                .foregroundColor(.white)
+                            Text("Pick a game and test your skills")
+                                .font(.subheadline)
+                                .foregroundColor(.white.opacity(0.65))
                         }
-
-                        NavigationLink {
-                           LightItUpGameView()
-                        } label: {
-                            HStack(spacing: 10) {
-                                
-                                Text("Light It Up Game")
-                                    .font(.system(size: 17, weight: .medium, design: .rounded))
+                        .padding(.top, 20)
+                        VStack(spacing: 20) {
+                            ForEach(games) { game in
+                                NavigationLink(destination: game.destination) {
+                                    GameCard(game: game)
+                                }
+                                .buttonStyle(.plain)
                             }
-                            .foregroundColor(Color(red: 0.40, green: 0.62, blue: 0.95))
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 56)
-                            .background(
-                                RoundedRectangle(cornerRadius: 16)
-                                    .fill(Color.white)
-                                    .shadow(color: Color.black.opacity(0.06), radius: 8, x: 0, y: 2)
-                            )
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 16)
-                                    .stroke(Color(red: 0.88, green: 0.91, blue: 0.97), lineWidth: 1)
-                            )
                         }
                     }
-                    .padding(.horizontal, 28)
-                    .padding(.bottom, 48)
+                    .padding(.horizontal, 30)
                 }
+                .scrollContentBackground(.hidden)
             }
-            .navigationBarHidden(true)
         }
     }
 }
+
+
+
+

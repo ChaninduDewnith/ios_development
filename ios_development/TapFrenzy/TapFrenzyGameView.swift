@@ -26,6 +26,7 @@ struct TapFrenzyGameView: View {
             
             VStack(spacing: 40) {
                 
+                
                 Text("Score: \(score)")
                     .font(.largeTitle)
                     .bold()
@@ -51,6 +52,7 @@ struct TapFrenzyGameView: View {
                         .scaleEffect(buttonScale())
                         .animation(.easeInOut(duration: 0.3), value: timeLeft)
                 }
+                
             }
             .onReceive(timer) { _ in
                 
