@@ -2,7 +2,8 @@ import SwiftUI
 
 struct ResultView: View {
     let score: Int
-    var restartGame: () -> Void = {}
+    @Binding var showResult: Bool
+    var onRestart: () -> Void = {}
 
     private var percentage: Double {
         Double(score) / 10.0
@@ -124,7 +125,7 @@ struct ResultView: View {
 
                 Button {
 
-                    restartGame()
+                    onRestart()
 
                 } label: {
 

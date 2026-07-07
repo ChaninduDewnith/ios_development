@@ -5,33 +5,40 @@
 //  Created by student2 on 2026-07-01.
 //
 import SwiftUI
-
 struct GameCard: View {
-    let game: GameItem
+    let title: String
+    let subtitle: String
+    let icon: String
+    let color: Color
+
     var body: some View {
-        HStack(spacing: 14) {
-            RoundedRectangle(cornerRadius: 12)
-                .fill(game.bgTint)
-                .frame(width: 46, height: 46)
-                .overlay(
-                    Image(systemName: game.icon)
-                        .font(.system(size: 20))
-                        .foregroundColor(game.tint)
-                )
-            Text(game.title)
-                .font(.subheadline.weight(.medium))
-                .foregroundColor(game.tint)
+        HStack(spacing: 16) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 14)
+                    .fill(color)
+                    .frame(width: 52, height: 52)
+
+                Image(systemName: icon)
+                    .font(.system(size: 22))
+                    .foregroundColor(.white)
+            }
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.headline)
+                    .foregroundColor(.white)
+                Text(subtitle)
+                    .font(.subheadline)
+                    .foregroundColor(.white.opacity(0.5))
+            }
+
             Spacer()
-            Text("Play")
-                .font(.caption.weight(.medium))
-                .foregroundColor(.white)
-                .padding(.horizontal, 18)
-                .padding(.vertical, 9)
-                .background(game.tint)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
+
+            Image(systemName: "chevron.right")
+                .foregroundColor(.white.opacity(0.3))
         }
-        .padding(14)
-        .background(game.cardTint)
-        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .padding()
+        .background(Color.white.opacity(0.08))
+        .cornerRadius(16)
     }
 }
