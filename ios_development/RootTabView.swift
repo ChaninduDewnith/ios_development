@@ -24,14 +24,14 @@ struct RootTabView: View {
             }
 
             NavigationStack {
-                
+                MapView()
             }
             .tabItem {
                 Label("Map", systemImage: "map.fill")
             }
 
             NavigationStack {
-             
+               SettingsView()
             }
             .tabItem {
                 Label("Settings", systemImage: "gearshape.fill")
