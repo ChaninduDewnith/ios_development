@@ -13,7 +13,7 @@ struct GameCard: View {
     let color: Color
 
     var body: some View {
-        HStack(spacing: 16) {
+        HStack(spacing: 36) {
             ZStack {
                 RoundedRectangle(cornerRadius: 14)
                     .fill(color)

@@ -15,7 +15,7 @@ struct HomeView: View {
                     .ignoresSafeArea()
 
                 ScrollView {
-                    VStack(spacing: 28) {
+                    VStack(spacing: 40) {
                         VStack(spacing: 6) {
                             Text("Challenge Zone")
                                 .font(.title.bold())
@@ -26,7 +26,7 @@ struct HomeView: View {
                         }
                         .padding(.top, 20)
 
-                        VStack(spacing: 16) {
+                        VStack(spacing: 36) {
                             NavigationLink(destination: TapFrenzyView()) {
                                 GameCard(
                                     title: "Tap Frenzy",
