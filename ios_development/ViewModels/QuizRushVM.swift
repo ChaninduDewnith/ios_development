@@ -1,9 +1,16 @@
+//
+//  QuizRushVM.swift
+//  ios_development
+//
+//  Created by cobsccomp251p-055 on 2026-07-09.
+//
+
 import Foundation
 import SwiftUI
 import Combine
 
-@MainActor
-class QuizView: ObservableObject {
+
+class QuizRushVM: ObservableObject {
     
     enum ViewState {
         case loading
@@ -75,12 +82,16 @@ class QuizView: ObservableObject {
         }
     }
     
+    
     func resetGame(){
         index=0
         score=0
         streak=0
         
     }
+    
+   
+        
     
     
     

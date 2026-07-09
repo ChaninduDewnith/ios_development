@@ -1,8 +1,8 @@
 //
-//  HomeView.swift
+//  HomeTab.swift
 //  ios_development
 //
-//  Created by student2 on 2026-06-17.
+//  Created by cobsccomp251p-055 on 2026-07-09.
 //
 
 import SwiftUI
@@ -15,7 +15,7 @@ struct HomeView: View {
                     .ignoresSafeArea()
 
                 ScrollView {
-                    VStack(spacing: 28) {
+                    VStack(spacing: 40) {
                         VStack(spacing: 6) {
                             Text("Challenge Zone")
                                 .font(.title.bold())
@@ -26,8 +26,8 @@ struct HomeView: View {
                         }
                         .padding(.top, 20)
 
-                        VStack(spacing: 16) {
-                            NavigationLink(destination: TapFrenzyGameView()) {
+                        VStack(spacing: 36) {
+                            NavigationLink(destination: TapFrenzyView()) {
                                 GameCard(
                                     title: "Tap Frenzy",
                                     subtitle: "Quick reflexes, big scores",
@@ -36,7 +36,7 @@ struct HomeView: View {
                                 )
                             }
 
-                            NavigationLink(destination: LightItUpGameView()) {
+                            NavigationLink(destination: LightItUpView()) {
                                 GameCard(
                                     title: "Light It Up",
                                     subtitle: "Match the pattern",
@@ -45,7 +45,7 @@ struct HomeView: View {
                                 )
                             }
 
-                            NavigationLink(destination: QuizGameView()) {
+                            NavigationLink(destination: QuizRushView()) {
                                 GameCard(
                                     title: "Quiz Game",
                                     subtitle: "How much do you know?",
@@ -65,8 +65,3 @@ struct HomeView: View {
     
     
 }
-
-
-
-
-

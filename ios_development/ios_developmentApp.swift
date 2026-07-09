@@ -6,12 +6,20 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct ios_developmentApp: App {
+    @State private var locationService = LocationService()
+
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            RootTabView()
+                .environment(locationService)
+                .onAppear {
+                    locationService.requestPermissionOnLaunch()
+                }
         }
+        .modelContainer(for: GameSession.self)
     }
 }

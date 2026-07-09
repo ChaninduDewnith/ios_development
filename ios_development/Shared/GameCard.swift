@@ -2,8 +2,9 @@
 //  GameCard.swift
 //  ios_development
 //
-//  Created by student2 on 2026-07-01.
+//  Created by cobsccomp251p-055 on 2026-07-09.
 //
+
 import SwiftUI
 struct GameCard: View {
     let title: String
@@ -12,7 +13,7 @@ struct GameCard: View {
     let color: Color
 
     var body: some View {
-        HStack(spacing: 16) {
+        HStack(spacing: 36) {
             ZStack {
                 RoundedRectangle(cornerRadius: 14)
                     .fill(color)

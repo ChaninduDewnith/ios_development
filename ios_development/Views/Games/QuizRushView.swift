@@ -1,8 +1,15 @@
+//
+//  QuizRushView.swift
+//  ios_development
+//
+//  Created by cobsccomp251p-055 on 2026-07-09.
+//
+
 import SwiftUI
 import Combine
 
-struct QuizGameView: View {
-    @StateObject private var vm = QuizView()
+struct QuizRushView: View {
+    @StateObject private var vm = QuizRushVM()
 
     
     @State private var timeRemaining = 30
@@ -49,11 +56,20 @@ struct QuizGameView: View {
 
                 case .loaded:
                     if gameOver {
-                        ResultView(score: vm.score,showResult:$gameOver,onRestart : restartGame)
+                        GameResultView(
+                              gameName: "Quiz Game",
+                              score: vm.score,
+                              
+                        )
+
                             
                        
                     } else if vm.isFinished {
-                        ResultView(score: vm.score,showResult:$gameOver,onRestart : restartGame)
+                        GameResultView(
+                              gameName: "Quiz Game",
+                              score: vm.score,
+                              
+                        )
                         
                         
                         
@@ -225,3 +241,5 @@ struct QuizGameView: View {
     
    
 }
+
+

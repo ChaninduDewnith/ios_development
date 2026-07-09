@@ -2,7 +2,7 @@
 //  GameItem.swift
 //  ios_development
 //
-//  Created by student2 on 2026-07-01.
+//  Created by cobsccomp251p-055 on 2026-07-09.
 //
 
 import SwiftUI
