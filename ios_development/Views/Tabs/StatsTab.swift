@@ -1,10 +1,3 @@
-//
-//  StatsTab.swift
-//  ios_development
-//
-//  Created by cobsccomp251p-055 on 2026-07-09.
-//
-
 import SwiftUI
 import SwiftData
 import Charts
@@ -12,42 +5,48 @@ import Charts
 struct StatsView: View {
     @Query(sort: \GameSession.date, order: .reverse) private var sessions: [GameSession]
 
-    private var gameNames: [String] {
-        Array(Set(sessions.map { $0.gameName })).sorted()
-    }
-
-    private func bestScore(for game: String) -> Int {
-        sessions.filter { $0.gameName == game }.map { $0.score }.max() ?? 0
-    }
-
-    private func averageScore(for game: String) -> Double {
-        let scores = sessions.filter { $0.gameName == game }.map { $0.score }
-        guard !scores.isEmpty else { return 0 }
-        return Double(scores.reduce(0, +)) / Double(scores.count)
+    private var viewModel: StatsViewModel {
+        StatsViewModel(sessions: sessions)
     }
 
     var body: some View {
         List {
             Section("Overview") {
-                LabeledContent("Total games played", value: "\(sessions.count)")
-                LabeledContent("Total score", value: "\(sessions.reduce(0) { $0 + $1.score })")
+                LabeledContent {
+                    Text("\(viewModel.totalGamesPlayed)")
+                } label: {
+                    Label("Total games played", systemImage: "gamecontroller.fill")
+                }
+
+                LabeledContent {
+                    Text("\(viewModel.totalScore)")
+                } label: {
+                    Label("Total score", systemImage: "star.fill")
+                }
             }
 
             if !sessions.isEmpty {
                 Section("Best Scores") {
-                    ForEach(gameNames, id: \.self) { game in
-                        LabeledContent(game, value: "\(bestScore(for: game))")
+                    ForEach(viewModel.gameNames, id: \.self) { game in
+                        LabeledContent {
+                            Text("\(viewModel.bestScore(for: game))")
+                                .fontWeight(.bold)
+                        } label: {
+                            Label(game, systemImage: "trophy.fill")
+                                .foregroundColor(.blue)
+                        }
                     }
                 }
 
                 Section("Average score by game") {
                     Chart {
-                        ForEach(gameNames, id: \.self) { game in
+                        ForEach(viewModel.gameNames, id: \.self) { game in
                             BarMark(
                                 x: .value("Game", game),
-                                y: .value("Average score", averageScore(for: game))
+                                y: .value("Average score", viewModel.averageScore(for: game))
                             )
                             .foregroundStyle(by: .value("Game", game))
+                            .cornerRadius(6)
                         }
                     }
                     .frame(height: 220)
@@ -59,8 +58,9 @@ struct StatsView: View {
                 if sessions.isEmpty {
                     Text("No games played yet. Go play something!")
                         .foregroundStyle(.secondary)
+                        .padding(.vertical, 8)
                 } else {
-                    ForEach(sessions.prefix(10)) { session in
+                    ForEach(viewModel.recentSessions) { session in
                         HStack {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(session.gameName)
@@ -72,7 +72,9 @@ struct StatsView: View {
                             Spacer()
                             Text("\(session.score)")
                                 .font(.title3.bold())
+                                .foregroundColor(.blue)
                         }
+                        .padding(.vertical, 4)
                     }
                 }
             }
@@ -80,5 +82,3 @@ struct StatsView: View {
         .navigationTitle("Stats")
     }
 }
-
-
