@@ -17,7 +17,7 @@ struct RootTabView: View {
             }
 
             NavigationStack {
-           
+                StatsView()
             }
             .tabItem {
                 Label("Stats", systemImage: "chart.bar.fill")
